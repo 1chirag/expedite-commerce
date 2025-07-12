@@ -162,6 +162,9 @@ Action:
 Extracts failed SQS messages
 Stores them into failed_orders DynamoDB table
 
+5. Code Pipeline with GitHub Trigger
+Whenever we push the code to git, we don't need to run terraform init and apply nothing pipeline will create by itself.
+
 -------------------------
 
 ✅ Test Execution Steps (Manual Verification)
@@ -210,3 +213,12 @@ order_id	status
 test001	FULFILLED / FAILED
 failed_orders table (only if 3 retries failed):
 | failed_order_id | payload (order_id, product, quantity) |
+
+-------------------------
+Security Practices Implemented
+1. Terraform Variables: Used externalized variables (terraform.tfvars) to manage environment-specific and sensitive values (e.g., github_token, project_name, repo_name) instead of hardcoding them.
+
+2. Remote Backend with S3: Configured Terraform remote backend using an S3 bucket to securely store the state file, ensuring state consistency and protection against local data loss.
+
+3. IAM Roles: Created and attached IAM roles for Lambda, CodeBuild, and CodePipeline with required policies to ensure scoped access to AWS resources using the principle of least privilege.
+
