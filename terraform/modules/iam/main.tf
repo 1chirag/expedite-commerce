@@ -125,3 +125,4 @@ resource "aws_iam_role_policy" "lambda_dlq_access" {
     }]
   })
 }
+

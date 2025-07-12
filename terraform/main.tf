@@ -71,7 +71,17 @@ resource "aws_lambda_event_source_mapping" "sqs_trigger" {
 module "dlq_handler_lambda" {
   source           = "./modules/lambdas/dlq_handler"
   lambda_role_arn  = module.lambda_iam.lambda_role_arn
-  lambda_zip_path  = "${path.module}/../artifacts/dlq_handler.zip"
+  lambda_zip_path  = "${path.module}/../artifacts/dlq_handler.zip" #test
   environment      = "dev"
   dlq_arn          = module.sqs.dlq_arn
+}
+
+module "pipeline" {
+  source          = "./modules/pipeline"
+  project_name    = var.project_name
+  github_owner    = var.github_owner
+  github_repo     = var.github_repo
+  github_branch   = var.github_branch
+  github_token    = var.github_token
+  environment     = var.environment
 }

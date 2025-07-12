@@ -3,29 +3,28 @@ variable "project_name" {
   type        = string
 }
 
+variable "environment" {
+  description = "Environment (e.g. dev, prod)"
+  type        = string
+}
+
 variable "github_owner" {
-  description = "GitHub username or organization"
+  description = "GitHub owner (username or org)"
   type        = string
 }
 
 variable "github_repo" {
-  description = "GitHub repository name"
+  description = "GitHub repo name"
   type        = string
 }
 
 variable "github_branch" {
-  description = "GitHub branch to track"
+  description = "GitHub branch"
   type        = string
   default     = "main"
 }
 
 variable "github_token" {
   description = "GitHub Personal Access Token"
-  type        = string
-  sensitive   = true
-}
-
-variable "environment" {
-  description = "Deployment environment name"
   type        = string
 }
